@@ -113,39 +113,38 @@ Matrix = str2double(get(handles.uitable1, 'Data'));
 x = Matrix(:,1);
 y = Matrix(:,2);
 %plot(x,y,'g-');
-xlabel('Gp')
-ylabel('P/z')
 
-%syms agrega la variable a la ecuación
+%syms agrega la variable a la ecuaciï¿½n
 syms t
 
-%polyfit devuelve los coeficientes para un polinomio (ajusta a mínimos
+%polyfit devuelve los coeficientes para un polinomio (ajusta a mï¿½nimos
 %cuadrados)
 ec = polyfit(x,y,1)
 
-%Se divide entre 1*10^3 para deshacer la factorización que realiza MATLAB
+%Se divide entre 1*10^3 para deshacer la factorizaciï¿½n que realiza MATLAB
 %por default
 lEc = (ec./(1.0.*10^(3)))
 
-%Se crea una expresión polinomial para un vector simbólico de coeficientes
-%A partir del polinomio anterior se crea la ecuación de la recta.
+%Se crea una expresiï¿½n polinomial para un vector simbï¿½lico de coeficientes
+%A partir del polinomio anterior se crea la ecuaciï¿½n de la recta.
 llEc = poly2sym(ec,t)
 
-%children encuentra las subexpresiones o términos de una expresión simbólica
+%children encuentra las subexpresiones o tï¿½rminos de una expresiï¿½n simbï¿½lica
 sp = children(llEc)
 
-%vpa devuelve una aproximación numérica para expresiones  que utilizan
-%variables simbólicas
+%vpa devuelve una aproximaciï¿½n numï¿½rica para expresiones  que utilizan
+%variables simbï¿½licas
 t1 = vpa(sp(1))
 t2 = vpa(sp(2))
 
-%Se pasan por separado los términos del polinomio correspondiente a la
-%ecuación y se convierten a caracteres los términos de la ecuación, 
-%debido a que éstas son de tipo variable simbólica.
+
+%Se pasan por separado los tï¿½rminos del polinomio correspondiente a la
+%ecuaciï¿½n y se convierten a caracteres los tï¿½rminos de la ecuaciï¿½n, 
+%debido a que ï¿½stas son de tipo variable simbï¿½lica.
 set(handles.ecuacionE,'string',char(t1))
 set(handles.ecuacionE2, 'string',char(t2))
 
-%Se ajusta el rango de tendencia de los valores en x para la línea
+%Se ajusta el rango de tendencia de los valores en x para la lï¿½nea
 xFitted = 0:19
 
 %Se ajustan los valores de y
@@ -153,6 +152,8 @@ yFitted = polyval(ec,xFitted)
 
 %Se grafica tanto el modelo como los valores originales
 plot(xFitted,yFitted,'mo-',x,y,'bd-')
+xlabel('Gp')
+ylabel('P/z')
 
 
 
